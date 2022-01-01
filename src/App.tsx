@@ -11,11 +11,11 @@ import BigNumber from 'bignumber.js'
 import { QueryParamProvider } from 'use-query-params'
 import { Web3ReactProvider } from '@web3-react/core'
 import MainLayouts from 'src/components/MainLayouts'
-import Footer from './components/Footer'
-import Header from './components/Header'
+
 import useEagerConnect from 'src/hooks/useEagerConnect'
 import PrivateIDOPages from './pages/PrivateIDO'
 import PrivateIDODetailPages from './pages/PrivateIDODetail'
+import HomePage from './pages/Home'
 import { getLibrary } from './utils/web3React'
 import { RefreshContextProvider } from './contexts/RefreshContext'
 import ModalProvider from './contexts/ModalContext'
@@ -76,10 +76,10 @@ function App() {
           <ModalProvider>
             <MainLayouts>
               <Routes>
-                <Route path="/" element={<PrivateIDOPages />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/private-ido" element={<PrivateIDOPages />} />
                 <Route
-                  path="/ido-detail/:id"
+                  path="/private-ido/:id"
                   element={<PrivateIDODetailPages />}
                 />
               </Routes>

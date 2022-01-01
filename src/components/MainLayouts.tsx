@@ -18,10 +18,12 @@ import {
   PopoverContent,
   PopoverBody,
   Button,
+  MenuIcon,
+  Image,
 } from '@chakra-ui/react'
 import { ReactComponent as BuyFamIcon } from 'src/assets/svgs/buy-fam-icon.svg'
 import { ReactComponent as MembershipVaultIcon } from 'src/assets/svgs/membership-vault-icon.svg'
-import { ReactComponent as ProjectsIcon } from 'src/assets/svgs/projects-icon.svg'
+
 import { ReactComponent as PoolsIcon } from 'src/assets/svgs/pools-icon.svg'
 import { ReactComponent as ShoppingCartIcon } from 'src/assets/svgs/shopping-cart-icon.svg'
 import { ReactComponent as FamCircleIcon } from 'src/assets/svgs/fam-circle-icon.svg'
@@ -34,6 +36,11 @@ import { ReactComponent as GlobalIcon } from 'src/assets/svgs/language-icon.svg'
 import { ReactComponent as WalletIcon } from 'src/assets/svgs/wallet-icon.svg'
 import { ReactComponent as Investment } from 'src/assets/svgs/investment-icon.svg'
 import { ReactComponent as CollapsedIcon } from 'src/assets/svgs/collapse-menu-icon.svg'
+import { ReactComponent as BlindBoxIcon } from 'src/assets/svgs/blind-box.svg'
+import { ReactComponent as NFTSummonIcon } from 'src/assets/svgs/nft-icon.svg'
+import { ReactComponent as NFTRecoveryIcon } from 'src/assets/svgs/nft-recovery.svg'
+
+import { ReactComponent as PrivateIDOIcon } from 'src/assets/svgs/private-ido.svg'
 import { Link, useLocation } from 'react-router-dom'
 import useGetFAMInfo from 'src/hooks/useGetFAMInfo'
 
@@ -41,42 +48,48 @@ import ConnectWalletButton from './ConnectWalletButton'
 import { useWeb3React } from '@web3-react/core'
 import useAuth from 'src/hooks/useAuth'
 import useWalletModal from 'src/hooks/useWalletModal'
-import BgImage from 'src/assets/images/bg_website.jpeg'
+import BgImage from 'src/assets/images/bg_website.png'
+import NBImage from 'src/assets/images/nav_bar.png'
+import { useWindowSize } from 'src/hooks/useWindowSize'
 
 const ListMenu = [
   {
     id: 1,
-    link: '/',
+    link: '#',
     title: 'Buy FAM',
     Icon: BuyFamIcon,
   },
   {
     id: 2,
-    link: '/membership-vault',
-    title: 'Membership Vault',
-    Icon: MembershipVaultIcon,
+    link: '#',
+    title: 'Blindbox',
+    coming: true,
+    Icon: BlindBoxIcon,
   },
   {
     id: 3,
-    link: '/investments',
-    title: 'Investment',
-    Icon: Investment,
+    link: '#',
+    title: 'NFT Summon',
+    coming: true,
+    Icon: NFTSummonIcon,
   },
   {
     id: 4,
-    link: '#',
-    title: 'Farms',
-    Icon: ShoppingCartIcon,
+    link: '/private-ido',
+    title: 'Private IDO',
+    Icon: PrivateIDOIcon,
   },
   {
     id: 5,
     link: '#',
-    title: 'Pools',
-    Icon: PoolsIcon,
+    coming: true,
+    title: 'NFT Recovery',
+    Icon: NFTRecoveryIcon,
   },
 ]
 
 const MainLayout: React.FC = ({ children }) => {
+  const { width } = useWindowSize()
   const [collapsed, setCollapsed] = useState(true)
   const location = useLocation()
   const { priceFormat } = useGetFAMInfo()
@@ -85,7 +98,7 @@ const MainLayout: React.FC = ({ children }) => {
   const { onPresentAccountModal } = useWalletModal(login, logout, account)
 
   return (
-    <Box display="flex" overflow="hidden" position="relative" bg="#181826">
+    <Flex overflow="hidden" position="relative">
       <Box
         style={{
           transition: 'left 0.3s',
@@ -94,6 +107,11 @@ const MainLayout: React.FC = ({ children }) => {
         top="10px"
         left={collapsed ? '68px' : '270px'}
         zIndex="1010"
+        // display={{
+        //   base: 'none',
+        //   md: 'block',
+        // }}
+        display={width <= 768 ? 'none' : 'block'}
         onClick={() => {
           setCollapsed((currentState) => !currentState)
         }}
@@ -101,8 +119,13 @@ const MainLayout: React.FC = ({ children }) => {
         <CollapsedIcon />
       </Box>
 
-      <Box h="100vh">
-        <ProSidebar collapsed={collapsed}>
+      <Box
+        h="100vh"
+        bgImage={NBImage}
+        position={{ base: 'absolute', md: 'relative' }}
+        zIndex={20}
+      >
+        <ProSidebar collapsed={collapsed} collapsedWidth={0}>
           <SidebarHeader>
             <Box display="flex" justifyContent="center" alignItems="center">
               <Box w={121} mt="40px">
@@ -113,7 +136,7 @@ const MainLayout: React.FC = ({ children }) => {
           <SidebarContent style={{ marginTop: 20 }}>
             <Menu iconShape="square">
               {ListMenu.map((item, index) => {
-                const { Icon, title, id, link } = item
+                const { Icon, title, id, link, coming = false } = item
                 return (
                   <MenuItem
                     key={index}
@@ -121,27 +144,34 @@ const MainLayout: React.FC = ({ children }) => {
                     active={location.pathname === link}
                   >
                     <Box
-                      _before={{
-                        background:
-                          location.pathname === link
-                            ? '#6667f8'
-                            : 'transparent',
-                        borderRadius: '0px 4px 4px 0px',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        bottom: 0,
-                        content: '""',
-                        width: '3px',
-                      }}
+                    // _before={{
+                    //   background:
+                    //     location.pathname === link
+                    //       ? '#6667f8'
+                    //       : 'transparent',
+                    //   borderRadius: '0px 4px 4px 0px',
+                    //   position: 'absolute',
+                    //   top: 0,
+                    //   left: 0,
+                    //   bottom: 0,
+                    //   content: '""',
+                    //   width: '3px',
+                    // }}
                     >
                       <Link to={link}>
                         <Text
                           fontSize="16px"
-                          lineHeight="26px"
-                          color={location.pathname === link ? 'white' : 'white'}
+                          lineHeight="28px"
+                          color={
+                            location.pathname === link ? 'white' : '#838383'
+                          }
                         >
-                          {title}
+                          {title}{' '}
+                          {coming ? (
+                            <span style={{ fontSize: 10 }}>(Coming Soon)</span>
+                          ) : (
+                            ''
+                          )}
                         </Text>
                       </Link>
                     </Box>
@@ -221,19 +251,29 @@ const MainLayout: React.FC = ({ children }) => {
         </Box>
       </Box>
 
-      <Box
-        bg="rgba(24, 24, 38, 0.8)"
-        backgroundImage={BgImage}
-        backgroundSize="cover"
-        width="100%"
-        style={{
-          height: '100vh',
-          overflowY: 'scroll',
-          backgroundImage: BgImage,
-        }}
-      >
-        <HStack flexDir="row" px="44px" mt="20px">
-          <div />
+      <Box backgroundSize="cover" overflow="hidden" backgroundImage={BgImage}>
+        <HStack
+          flexDir="row"
+          px={{
+            base: '20px',
+
+            lg: '44px',
+          }}
+          mt="20px"
+          mb="20px"
+        >
+          <Box>
+            <Box display={width <= 768 ? 'block' : 'none'}>
+              <HStack>
+                <Image
+                  src="/svgs/hamburger-menu.svg"
+                  onClick={() => setCollapsed((current) => !current)}
+                  zIndex={2000}
+                />
+                <Image src="/svgs/yellow-logo-fam.svg" />
+              </HStack>
+            </Box>
+          </Box>
           <Spacer />
           {!account ? (
             <ConnectWalletButton />
@@ -265,9 +305,11 @@ const MainLayout: React.FC = ({ children }) => {
             </Button>
           )}
         </HStack>
-        {children}
+        <Box width="100%" height="100vh" overflowY="scroll">
+          <Box>{children}</Box>
+        </Box>
       </Box>
-    </Box>
+    </Flex>
   )
 }
 
