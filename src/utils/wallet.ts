@@ -2,7 +2,6 @@ import { BASE_BSC_SCAN_URL } from 'src/config'
 import { nodes } from './getRpcUrl'
 
 export const setupNetwork = async () => {
-  const { REACT_APP_CHAIN_ID } = process.env
   // console.log('---------setupNetwork----------');
   // console.log({ nodes, REACT_APP_CHAIN_ID, BASE_BSC_SCAN_URL });
   // console.log('-------------------');

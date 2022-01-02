@@ -10,7 +10,6 @@ import {
   AccordionIcon,
   Button,
   Image,
-  Badge,
 } from '@chakra-ui/react'
 import { useDetailPrivateIDO } from 'src/hooks/useDetailPrivateIDO'
 

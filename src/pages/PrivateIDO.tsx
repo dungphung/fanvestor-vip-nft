@@ -51,9 +51,11 @@ const PrivateIDODetail = () => {
           lg: 2,
           xl: 3,
         }}
-        spacing={10}
+        spacing={{
+          base: 10,
+          lg: 5,
+        }}
         mt={10}
-        mx={10}
       >
         <IDOItem />
         <IDOItem />

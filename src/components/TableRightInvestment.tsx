@@ -12,39 +12,6 @@ import {
 import { useDetailPrivateIDO } from 'src/hooks/useDetailPrivateIDO'
 import StepInvestments from './StepInvestments'
 
-const dataPoolAllocation = [
-  {
-    id: 1,
-    items: 'NFT Genesis',
-    amount: '50',
-    swapRate: '50 CT',
-  },
-  {
-    id: 2,
-    items: 'NFT Fanvestor - SSR',
-    amount: '500',
-    swapRate: '50 CT',
-  },
-  {
-    id: 3,
-    items: 'NFT Fanvestor - SR',
-    amount: '50',
-    swapRate: '50 CT',
-  },
-  {
-    id: 4,
-    items: 'NFT Fanvestor - S',
-    amount: '500',
-    swapRate: '50 CT',
-  },
-  {
-    id: 5,
-    items: 'NFT Legend',
-    amount: '500',
-    swapRate: '50 CT',
-  },
-]
-
 const TableRightInvestment = () => {
   const { setTab } = useDetailPrivateIDO()
 

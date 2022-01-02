@@ -18,14 +18,10 @@ import {
   PopoverContent,
   PopoverBody,
   Button,
-  MenuIcon,
   Image,
 } from '@chakra-ui/react'
 import { ReactComponent as BuyFamIcon } from 'src/assets/svgs/buy-fam-icon.svg'
-import { ReactComponent as MembershipVaultIcon } from 'src/assets/svgs/membership-vault-icon.svg'
 
-import { ReactComponent as PoolsIcon } from 'src/assets/svgs/pools-icon.svg'
-import { ReactComponent as ShoppingCartIcon } from 'src/assets/svgs/shopping-cart-icon.svg'
 import { ReactComponent as FamCircleIcon } from 'src/assets/svgs/fam-circle-icon.svg'
 import { ReactComponent as TelegramIcon } from 'src/assets/svgs/telegram-icon.svg'
 import { ReactComponent as FaceBookIcon } from 'src/assets/svgs/facebook-icon.svg'
@@ -107,10 +103,7 @@ const MainLayout: React.FC = ({ children }) => {
         top="10px"
         left={collapsed ? '68px' : '270px'}
         zIndex="1010"
-        // display={{
-        //   base: 'none',
-        //   md: 'block',
-        // }}
+
         display={width <= 768 ? 'none' : 'block'}
         onClick={() => {
           setCollapsed((currentState) => !currentState)
@@ -144,19 +137,7 @@ const MainLayout: React.FC = ({ children }) => {
                     active={location.pathname === link}
                   >
                     <Box
-                    // _before={{
-                    //   background:
-                    //     location.pathname === link
-                    //       ? '#6667f8'
-                    //       : 'transparent',
-                    //   borderRadius: '0px 4px 4px 0px',
-                    //   position: 'absolute',
-                    //   top: 0,
-                    //   left: 0,
-                    //   bottom: 0,
-                    //   content: '""',
-                    //   width: '3px',
-                    // }}
+
                     >
                       <Link to={link}>
                         <Text
@@ -251,12 +232,16 @@ const MainLayout: React.FC = ({ children }) => {
         </Box>
       </Box>
 
-      <Box backgroundSize="cover" overflow="hidden" backgroundImage={BgImage}>
+      <Box
+        backgroundSize="cover"
+        overflow="hidden"
+        width="100%"
+        backgroundImage={BgImage}
+      >
         <HStack
           flexDir="row"
           px={{
             base: '20px',
-
             lg: '44px',
           }}
           mt="20px"
@@ -305,9 +290,7 @@ const MainLayout: React.FC = ({ children }) => {
             </Button>
           )}
         </HStack>
-        <Box width="100%" height="100vh" overflowY="scroll">
-          <Box>{children}</Box>
-        </Box>
+        <Box width="100%">{children}</Box>
       </Box>
     </Flex>
   )
