@@ -26,6 +26,7 @@ import CountDown from 'src/components/CountDown'
 import TableRightInvestment from 'src/components/TableRightInvestment'
 import { useWindowSize } from 'src/hooks/useWindowSize'
 import { stringDateToUTCDate } from 'src/utils/helpers'
+import useModalStackNFT from 'src/hooks/useModalStackNFT'
 
 type IProps = {}
 

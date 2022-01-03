@@ -12,9 +12,11 @@ import {
   Image,
 } from '@chakra-ui/react'
 import { useDetailPrivateIDO } from 'src/hooks/useDetailPrivateIDO'
+import useModalStackNFT from 'src/hooks/useModalStackNFT'
 
 const JoinPool = ({}) => {
   const { tab, setTab } = useDetailPrivateIDO()
+  const { onPresentModalStackNFT } = useModalStackNFT()
   return (
     <Box
       bg={'#18171D'}
@@ -104,6 +106,7 @@ const JoinPool = ({}) => {
                   fontSize="12px"
                   lineHeight="22px"
                   color={tab === 2 ? '#EFBF1C' : '#3A3A3A'}
+                  onClick={onPresentModalStackNFT}
                 >
                   Stake NFT
                 </Button>
